@@ -1,0 +1,9 @@
+{
+  id: product.id,
+  user_id: product.user_id,
+  name: product.name,
+  description: product.description,
+  quantity: product.quantity,
+  price: product.price,
+  image_url: product.image_url
+}

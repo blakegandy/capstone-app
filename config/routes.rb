@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  # EXAMPLE HTML ROUTE
-  # get "/photos" => "photos#index"
+  namespace :api do
+    get "/appointments" => "appointments#index"
+    get "/appointments/:id" => "appointments#show"
+    post "/appointments" => "appointments#create"
 
-  # EXAMPLE JSON ROUTE WITH API NAMESPACE
-  # namespace :api do
-  #   get "/photos" => "photos#index"
-  # end
+    get "/products" => "products#index"
+    get "/products/:id" => "products#show"
+    post "/products" => "products#create"
+    patch "/products/:id" => "products#update"
+    delete "/products/:id" => "products#destroy"
+
+    post "/users" => "users#create"
+  end
 end
