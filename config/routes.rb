@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get "/appointments" => "appointments#index"
     get "/appointments/:id" => "appointments#show"
     post "/appointments" => "appointments#create"
+    patch "/appointments/:id" => "appointments#update"
 
     get "/products" => "products#index"
     get "/products/:id" => "products#show"

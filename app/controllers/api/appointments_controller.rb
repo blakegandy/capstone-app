@@ -16,5 +16,23 @@ class Api::AppointmentsController < ApplicationController
     else
       render json: {errors: @appointment.errors.full_messages}
     end
+  end 
+
+  def update
+    @appointment = Appointment.find(params[:id])
+      @appointment = params[:starts_at] || @appointment.starts_at
+      @appointment = params[:details] || @appointment.details
+    )
+    if @appointment.save
+      render "show.json.jb"
+    else
+      render json: {errors: @appointment.errors.full_messages}
+    end
+  end
+
+  def destroy
+    product = Product.find(params[:id])
+    product.destroy
+    render json: {message: "The item has been deleted!"}
   end
 end
