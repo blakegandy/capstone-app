@@ -33,6 +33,6 @@ class Api::AppointmentsController < ApplicationController
   def destroy
     product = Product.find(params[:id])
     product.destroy
-    render json: {message: "The item has been deleted!"}
+    render json: {message: "The appointment has been deleted!"}
   end
 end

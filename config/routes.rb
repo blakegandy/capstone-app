@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get "/appointments/:id" => "appointments#show"
     post "/appointments" => "appointments#create"
     patch "/appointments/:id" => "appointments#update"
+    delete "/appointments/:id" => "appointments#destroy"
 
     get "/products" => "products#index"
     get "/products/:id" => "products#show"
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
     patch "/products/:id" => "products#update"
     delete "/products/:id" => "products#destroy"
 
+    get "/users" => "users#index"
     post "/users" => "users#create"
   end
 end
