@@ -1,0 +1,1 @@
+appointment = render partial: "appointment.json.jb", locals: {appointment: @appointment}

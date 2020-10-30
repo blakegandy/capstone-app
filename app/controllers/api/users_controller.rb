@@ -1,4 +1,5 @@
 class Api::UsersController < ApplicationController
+
   def create
     user = User.new(
       first_name: params[:first_name],
@@ -31,15 +32,20 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user = params[:first_name] || @user.first_name
-    @user = params[:last_name] || @user.last_name
-    @user = params[:email] || @user.email
-    @user = params[:phone_number] || @user.phone_number
-    @user = params[:password] || @user.password
-    @user = params[:password_confirmation] || @user.password_confirmation
-    @user = params[:salon] || @user.salon
-    @user = params[:image_url] || @user.image_url
-    @user = params[:specialty] || @user.specialty
+    @user.first_name = params[:first_name] || @user.first_name
+    @user.last_name = params[:last_name] || @user.last_name
+    @user.email = params[:email] || @user.email
+    @user.phone_number = params[:phone_number] || @user.phone_number
+    @user.password = params[:password] || @user.password
+    @user.password_confirmation = params[:password_confirmation] || @user.password_confirmation
+    @user.salon = params[:salon] || @user.salon
+    @user.image_url = params[:image_url] || @user.image_url
+    @user.specialty = params[:specialty] || @user.specialty
+    if @user.save
+      render "show.json.jb"
+    else
+      render json: {errors: @user.errors.full_messages}
+    end
   end
 
   def destroy

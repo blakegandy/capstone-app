@@ -2,6 +2,6 @@
   id: appointment.id,
   stylist_id: appointment.stylist_id,
   client_id: appointment.client_id,
-  starts_at: appointment.starts_at
+  starts_at: appointment.starts_at,
   details: appointment.details
 }
