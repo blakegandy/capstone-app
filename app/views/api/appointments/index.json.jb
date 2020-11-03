@@ -1,3 +1,9 @@
 @appointments.map do |appointment|
-  render partial: "appointment.json.jb", locals: {appointment: appointment}
+  appointment_hash = render partial: "appointment.json.jb", locals: {appointment: appointment}
+  if current_user.stylist
+    appointment_hash[:client] = render partial: "api/users/user", locals:{user: appointment.client}
+  else
+    appointment_hash[:stylist] = render partial: "api/users/user", locals:{user: appointment.stylist}
+  end
+  appointment_hash
 end

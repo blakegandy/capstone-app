@@ -1,5 +1,7 @@
 class Api::UsersController < ApplicationController
 
+  before_action :authenticate_user, except: [:create, :index, :show]
+
   def create
     user = User.new(
       first_name: params[:first_name],
@@ -21,7 +23,7 @@ class Api::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.where(stylist: true)
     render "index.json.jb"
   end
 
@@ -31,25 +33,27 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     @user.first_name = params[:first_name] || @user.first_name
     @user.last_name = params[:last_name] || @user.last_name
     @user.email = params[:email] || @user.email
     @user.phone_number = params[:phone_number] || @user.phone_number
-    @user.password = params[:password] || @user.password
-    @user.password_confirmation = params[:password_confirmation] || @user.password_confirmation
+    if params[:password]
+      @user.password = params[:password] 
+      @user.password_confirmation = params[:password_confirmation]
+    end
     @user.salon = params[:salon] || @user.salon
     @user.image_url = params[:image_url] || @user.image_url
     @user.specialty = params[:specialty] || @user.specialty
     if @user.save
       render "show.json.jb"
     else
-      render json: {errors: @user.errors.full_messages}
+      render json: {errors: @user.errors.full_messages}, status: 422
     end
   end
 
   def destroy
-    user = User.find(params[:id])
+    user = current_user
     user.destroy
     render json: {message: "The user has been deleted!"}
   end

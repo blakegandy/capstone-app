@@ -1,9 +1,3 @@
-@users.each do |user|
-  @stylist_array = []
-  if user.stylist == true 
-    @stylist_array << user
-  end
-end
-@stylist_array.map do |stylist|
-  render partial: "user.json.jb", locals: {stylist: stylist}
+@users.map do |user|
+  render partial: "user.json.jb", locals: {user: user}
 end

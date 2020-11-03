@@ -10,7 +10,7 @@ class Api::ProductsController < ApplicationController
   def create
     @product = Product.new(
       id: params[:id],
-      user_id: params[:user_id],
+      user_id: current_user.id,
       name: params[:name],
       description: params[:description],
       quantity: params[:quantity],
@@ -25,7 +25,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product = current_user.products.find(params[:id])
     @product.name = params[:name] || @product.name
     @product.description = params[:description] || @product/description
     @product.price = params[:price] || @product.price
@@ -40,7 +40,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def destroy
-    product = Product.find(params[:id])
+    product = current_user.products.find(params[:id])
     product.destroy
     render json: {message: "The item has been deleted!"}
   end
