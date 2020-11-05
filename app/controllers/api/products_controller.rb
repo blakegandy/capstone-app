@@ -27,9 +27,9 @@ class Api::ProductsController < ApplicationController
   def update
     @product = current_user.products.find(params[:id])
     @product.name = params[:name] || @product.name
-    @product.description = params[:description] || @product/description
+    @product.description = params[:description] || @product.description
     @product.price = params[:price] || @product.price
-    @product.quantity = params[:stock] || @product.quantity
+    @product.quantity = params[:quantity] || @product.quantity
     @product.image_url = params[:image_url] || @product.image_url
 
     if @product.save
